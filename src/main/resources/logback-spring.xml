@@ -15,7 +15,7 @@
     </appender>
 
     <!-- Logger -->
-    <logger name="com.example.time" level="DEBUG" appender-ref="console" /> # src/main/java 디렉터리 안의 자바 패키지 경로
+    <logger name="com.example.board" level="DEBUG" appender-ref="console" /> # src/main/java 디렉터리 안의 자바 패키지 경로
     <logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
     <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />
 
