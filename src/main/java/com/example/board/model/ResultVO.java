@@ -1,4 +1,4 @@
-package com.example.board.entity;
+package com.example.board.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
