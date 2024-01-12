@@ -14,6 +14,6 @@ public class ResResult {
 	@Schema(description = "응답 관련 메시지")
 	public String message;
 	
-	@Schema(description = "응답에 따라 전송되는 객체" )
+	@Schema(description = "응답에 필요한 정보" )
 	public Object object;
 }

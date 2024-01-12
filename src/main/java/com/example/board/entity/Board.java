@@ -3,7 +3,9 @@ package com.example.board.entity;
 
 import java.sql.Timestamp;
 
-import jakarta.annotation.Generated;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,9 +45,11 @@ public class Board extends BaseTimeEntity{
 	@Column(name="contents")
 	private String contents;
 	
-	@Column(name="create_date" ,columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name="create_date")
+	@CreationTimestamp
 	private Timestamp createDate;
 	
+	@UpdateTimestamp
 	@Column(name="update_date")
 	private Timestamp updateDate;
 	

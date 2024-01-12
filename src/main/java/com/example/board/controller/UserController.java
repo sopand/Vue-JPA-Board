@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.board.req.ReqUserInsert;
-import com.example.board.req.ReqUserLogin;
+import com.example.board.req.user.ReqUserInsert;
+import com.example.board.req.user.ReqUserLogin;
 import com.example.board.res.ResResult;
 import com.example.board.service.UserService;
 
@@ -43,11 +43,11 @@ public class UserController {
 		HttpSession session=req.getSession(true);
 		ResResult result = userSRV.userLogin(reqData);
 		if (result.success) {
+			session.setAttribute("user_sid", result.getObject());
 			return ResponseEntity.ok(result);
 		}
-		session.setAttribute("user_sid", result.getObject());
 		return ResponseEntity.status(400).body(result);
-
 	}
+	
 
 }

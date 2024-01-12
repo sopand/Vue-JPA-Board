@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.board.entity.User;
 import com.example.board.repository.UserRepository;
-import com.example.board.req.ReqUserInsert;
-import com.example.board.req.ReqUserLogin;
+import com.example.board.req.user.ReqUserInsert;
+import com.example.board.req.user.ReqUserLogin;
 import com.example.board.res.ResResult;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,4 +42,6 @@ public class UserService {
 		
 		return ResResult.builder().success(true).message("로그인 성공").object(user.getUserSid()).build();
 	}
+	
+	
 }
