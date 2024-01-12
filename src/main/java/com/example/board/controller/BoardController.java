@@ -1,11 +1,13 @@
 package com.example.board.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.board.req.board.ReqBoardInsert;
+import com.example.board.req.board.ReqBoardRemove;
 import com.example.board.res.ResResult;
 import com.example.board.service.BoardService;
 
@@ -29,24 +31,45 @@ public class BoardController {
 	@ApiResponse(responseCode = "200",description = "게시글 등록성공")
 	@ApiResponse(responseCode = "400",description = "게시글 등록 실패 ")
 	public ResponseEntity<ResResult> boardInsert(HttpServletRequest req,ReqBoardInsert reqData){
-		HttpSession session=req.getSession(true);
-		Long user_sid=(Long)session.getAttribute("user_sid");
+		HttpSession session=req.getSession(false);
+		Long userSid=(Long)session.getAttribute("user_sid");
 		
-		if(user_sid==null) {
+		if(userSid==null) {
 			return ResponseEntity.status(400).body(
 					ResResult.builder()
 					.message("로그인이 되어있지 않습니다.")
 					.build()
 					);
 		}
-		reqData.setUserSid(user_sid);
+		reqData.setUserSid(userSid);
 		ResResult result=boardSRV.boardInsert(reqData);
 		if(result.success) {
 			return ResponseEntity.status(400).body(result);
 		}
 		return ResponseEntity.ok(result);
-		
+	}
+	
+	
+	@DeleteMapping("/{boardSid}")
+	@Operation(summary = "게시글 삭제하기")
+	@ApiResponse(responseCode = "200",description = "게시글 삭제 성공")
+	@ApiResponse(responseCode = "400",description = "게시글 삭제 실패")
+	public ResponseEntity<ResResult> boardRemove(HttpServletRequest req ,ReqBoardRemove reqData){
+		HttpSession session=req.getSession(false);
+		Long userSid=(Long)session.getAttribute("user_sid");
+		if(userSid==null) {
+			return ResponseEntity.status(400).body(
+					ResResult.builder()
+					.message("로그인이 되어있지 않습니다.")
+					.build()
+					);
+		}
+		reqData.setUserSid(userSid);
+		ResResult result=boardSRV.boardRemove(reqData);
+		if(result.success) {
+			return ResponseEntity.status(400).body(result);
+		}
+		return ResponseEntity.ok(result);
 		
 	}
-
 }
