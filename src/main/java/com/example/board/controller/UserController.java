@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class UserController {
 	@PostMapping(value = "/")
 	@Operation(summary = "유저 회원가입")
 	@ApiResponse(responseCode = "200", description = "회원가입 성공", useReturnTypeSchema = true)
-	public ResponseEntity<Long> userInsert(ReqUserInsert reqData) {
+	public ResponseEntity<Long> userInsert(@RequestBody ReqUserInsert reqData) {
 		Long userSid = userSRV.userInsert(reqData);
 		return ResponseEntity.ok(userSid);
 	}
@@ -49,5 +50,6 @@ public class UserController {
 		return ResponseEntity.status(400).body(result);
 	}
 	
+
 
 }

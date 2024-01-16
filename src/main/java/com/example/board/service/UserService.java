@@ -9,8 +9,6 @@ import com.example.board.req.user.ReqUserInsert;
 import com.example.board.req.user.ReqUserLogin;
 import com.example.board.res.ResResult;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -21,6 +19,7 @@ public class UserService {
 	private final PasswordEncoder encoder;
 
 	public Long userInsert(ReqUserInsert reqData) {
+		System.out.println(reqData);
 		User data = User.builder()
 				.id(reqData.getId())
 				.password(encoder.encode(reqData.getPassword()))
